@@ -10,7 +10,7 @@ import com.epam.pizzeria.model.User;
 @Transactional
 public interface UserService {
 
-    User find(Integer id);
+    User findUserById(Integer id);
     List<User> findAll() throws SQLException;
     User findUser(User us) throws SQLException, CustomerNotFoundException;
     User attemptAddUser(User us) throws SQLException, UserAlreadyExistException;

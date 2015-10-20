@@ -16,26 +16,23 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 @RequestMapping("/user")
 @SessionAttributes("current")
 public class UserController {
-    @Autowired
-    UserService userService;
-    
-    @RequestMapping(value = "show", method = RequestMethod.GET)
-    public String user(
-            UsernamePasswordAuthenticationToken currentUser,
-            @RequestParam(value = "id",required = true, defaultValue = "1")
-            Integer id,
-            Model model) {
-        User u = userService.find(id);
-        User current = (User) currentUser.getPrincipal();
-        model.addAttribute("user", u);
-        model.addAttribute("current", current);
-        model.addAttribute("title", current.getName());
-        return "user";
-    }
-    
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login(ModelMap model) {
-        
-        return "login";
-    }
+	@Autowired
+	UserService userService;
+
+	@RequestMapping(value = "show", method = RequestMethod.GET)
+	public String user(UsernamePasswordAuthenticationToken currentUser,
+			@RequestParam(value = "id", required = true, defaultValue = "1") Integer id, Model model) {
+		User u = userService.findUserById(id);
+		User current = (User) currentUser.getPrincipal();
+		model.addAttribute("user", u);
+		model.addAttribute("current", current);
+		model.addAttribute("title", current.getName());
+		return "user";
+	}
+
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String login(ModelMap model) {
+
+		return "login";
+	}
 }
